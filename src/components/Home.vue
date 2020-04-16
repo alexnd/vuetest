@@ -44,15 +44,18 @@ export default {
   },
   computed: {
     filteredUsers() {
-      const iFrom = (this.pagination.page-1) * this.pagination.per_page
-      const iTo = iFrom + this.pagination.per_page
-      const users = this.users.slice(iFrom, iTo)
-      const search = this.search.toLowerCase()
-      return search !== '' ? users.filter(u => {
-        let fullname = `${u.first_name} ${u.last_name}`
-        fullname = fullname.toLowerCase()
-        return fullname.indexOf(search) !== -1
-      }) : users
+      const search = this.search.replace(/^\s\s*/, '').replace(/\s\s*$/, '').toLowerCase()
+      if (search === '') {
+        const iFrom = (this.pagination.page-1) * this.pagination.per_page
+        const iTo = iFrom + this.pagination.per_page
+        return this.users.slice(iFrom, iTo)
+      } else {
+        return this.users.filter(u => {
+          let fullname = `${u.first_name} ${u.last_name}`
+          fullname = fullname.toLowerCase()
+          return fullname.indexOf(search) !== -1
+        })
+      }
     },
     isPrevAvailable() {
       return this.pagination.page > 1
