@@ -58,10 +58,10 @@ export default {
       }
     },
     isPrevAvailable() {
-      return this.pagination.page > 1
+      return this.pagination.page > 1 && this.search === ''
     },
     isNextAvailable() {
-      return this.pagination.page < this.pagination.total_pages
+      return this.pagination.page < this.pagination.total_pages && this.search === ''
     },
     ...mapGetters({
       'users': 'users',
