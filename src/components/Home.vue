@@ -47,7 +47,7 @@ export default {
       const iFrom = (this.pagination.page-1) * this.pagination.per_page
       const iTo = iFrom + this.pagination.per_page
       const users = this.users.slice(iFrom, iTo)
-      const search = this.search.toLowerCase().replace(/^\s\s*/, '').replace(/\s\s*$/, '')
+      const search = this.search.toLowerCase()
       return search !== '' ? users.filter(u => {
         let fullname = `${u.first_name} ${u.last_name}`
         fullname = fullname.toLowerCase()
